@@ -31,7 +31,7 @@ def check_urlib_response(response, platform):
 
 def post_to_slack(msg, channels, token):
     for channel in channels:
-        post_data = {'text': msg, 'channel': channel, 'token': token}
+        post_data = {'text': msg, 'channel': channel, 'token': token, 'as_user': False, 'username': 'Poloniex Lending Bot'}
         enc_post_data = urllib.urlencode(encoded_dict(post_data))
         url = 'https://{}/api/{}'.format('slack.com', 'chat.postMessage')
         response = urllib2.urlopen(url, enc_post_data)

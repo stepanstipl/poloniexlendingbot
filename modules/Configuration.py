@@ -2,8 +2,10 @@
 from ConfigParser import SafeConfigParser
 import json
 from decimal import Decimal
+import os
 
 config = SafeConfigParser()
+
 Data = None
 FULL_LIST = ['STR', 'BTC', 'BTS', 'CLAM', 'DOGE', 'DASH', 'LTC', 'MAID', 'XMR', 'XRP', 'ETH', 'FCT']
 # This module is the middleman between the bot and a SafeConfigParser object, so that we can add extra functionality
@@ -27,6 +29,12 @@ def init(file_location, data=None):
             ex.message = ex.message if ex.message else str(ex)
             print("Failed to automatically copy config. Please do so manually. Error: {0}".format(ex.message))
             exit(1)
+
+    for section in config.sections():
+        for option in config.options(section):
+            if os.environ.get(section.upper() + "_" + option.upper(), None):
+              config.set(section, option, os.environ.get(section.upper() + "_" + option.upper()))
+
     return config
 
 
