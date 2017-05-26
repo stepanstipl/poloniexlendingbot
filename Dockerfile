@@ -1,5 +1,6 @@
 FROM alpine:3.5
 ADD . /opt/poloniexlendingbot
+ADD default.cfg.example /opt/poloniexlendingbot/default.cfg
 
 WORKDIR /opt/poloniexlendingbot
 

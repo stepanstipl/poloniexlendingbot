@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
-
-docker run -it --rm \
+docker run -it \
            --name plb \
            -p 8080:8080 \
            --env-file .env \
            --restart always \
-           quay.io/stepanstipl/plb:latest \
+           -v /opt/plb/data:/opt/poloniexlendingbot/market_data \
+           quay.io/stepanstipl/poloniexlendingbot:latest \
            /usr/bin/python lendingbot.py
